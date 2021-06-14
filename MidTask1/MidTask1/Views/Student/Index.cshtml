@@ -1,0 +1,32 @@
+﻿@model List<MidTask1.Models.Student>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List all students</h2>
+
+<div class="container">
+    <table class="table table-condensed">
+        <tr>
+            <th>Name</th>
+            <th>Id</th>
+            <th>Dob</th>
+            <th>Credit</th>
+            <th>Cgpa</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var student in @Model)
+        {
+            <tr>
+                <td>@student.Name</td>
+                <td>@student.Id</td>
+                <td>@student.Dob</td>
+                <td>@student.Credit</td>
+                <td>@student.Cgpa</td>
+                <td><a class="btn btn-success" href="/Student/Edit/@student.StudentId">Edit</a></td>
+                <td><a class="btn btn-danger" href="/Student/Delete/@student.StudentId">Delete</a></td>
+            </tr>
+        }
+    </table>
+</div>

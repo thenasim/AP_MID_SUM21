@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Dashboard</h2>
+<h6 class="text-secondary">Students link</h6>
+<br />
+
+<div class="d-flex">
+    <a class="btn btn-primary me-3" href="/Student/Index">All Students</a>
+    <a class="btn btn-primary me-3" href="/Student/Insert">Add Student</a>
+</div>
+
+<br />
+@if (TempData["Msg"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Msg"]
+    </div>
+}

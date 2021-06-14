@@ -1,0 +1,46 @@
+﻿@model MidTask1.Models.Student
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Student</h2>
+
+<form action="/Student/Edit" method="post">
+    <input type="hidden" name="StudentId" value="@Model.StudentId" />
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <input name="Name" type="text" value="@Model.Name" autocomplete="off" class="form-control" id="Name">
+        <div class="form-text">
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="Id" class="form-label">Id</label>
+        <input name="Id" type="text" value="@Model.Id" autocomplete="off" class="form-control" id="Id">
+        <div class="form-text">
+            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="Dob" class="form-label">Date of birth</label>
+        <input name="Dob" type="date" value="@Model.Dob" autocomplete="off" class="form-control" id="Dob">
+        <div class="form-text">
+            @Html.ValidationMessageFor(model => model.Dob, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="Credit" class="form-label">Credit</label>
+        <input name="Credit" type="number" value="@Model.Credit" autocomplete="off" class="form-control" id="Credit">
+        <div class="form-text">
+            @Html.ValidationMessageFor(model => model.Credit, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="Cgpa" class="form-label">Cgpa</label>
+        <input name="Cgpa" type="number" value="@Model.Cgpa" autocomplete="off" class="form-control" id="Cgpa">
+        <div class="form-text">
+            @Html.ValidationMessageFor(model => model.Cgpa, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
