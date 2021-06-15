@@ -26,9 +26,13 @@ namespace MidTask1.Controllers
         [HttpPost]
         public ActionResult Insert(Student s)
         {
-            Database db = new Database();
-            db.Students.Insert(s);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                Database db = new Database();
+                db.Students.Insert(s);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
         public ActionResult Edit(int id)
@@ -41,9 +45,13 @@ namespace MidTask1.Controllers
         [HttpPost]
         public ActionResult Edit(Student s)
         {
-            Database db = new Database();
-            db.Students.Update(s);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                Database db = new Database();
+                db.Students.Update(s);
+                return RedirectToAction("Index");
+            }
+            return View(s);
         }
 
         public ActionResult Delete(int id)
