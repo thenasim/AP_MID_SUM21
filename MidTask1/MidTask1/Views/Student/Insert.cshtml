@@ -1,4 +1,4 @@
-﻿@model MidTask1.Models.Student
+﻿@model MidTask1.Models.ViewModel.StudentDepts
 @{
     ViewBag.Title = "Insert";
 }
@@ -8,37 +8,50 @@
 <form action="/Student/Insert" method="post">
     <div class="mb-3">
         <label for="Name" class="form-label">Name</label>
-        <input name="Name" type="text" autocomplete="off" class="form-control" id="Name">
+        <input name="Name" type="text" autocomplete="off" class="form-control" id="Name" placeholder="ex. Nasim Uddin">
         <div class="form-text">
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Name", "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="mb-3">
         <label for="Id" class="form-label">Id</label>
-        <input name="Id" type="text" autocomplete="off" class="form-control" id="Id">
+        <input name="Id" type="text" autocomplete="off" class="form-control" id="Id" placeholder="ex. 18-38447-2">
         <div class="form-text">
-            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Id", "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="Dept" class="form-label">Department</label>
+        <select name="DeptId" class="form-select" id="Dept" aria-label="Default select example">
+            <option value="">Select Department</option>
+            @foreach (var d in Model.Depts)
+            {
+                    <option value="@d.DeptId">@d.Name</option>
+            }
+        </select>
+        <div class="form-text">
+            @Html.ValidationMessage("DeptId", "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="mb-3">
         <label for="Dob" class="form-label">Date of birth</label>
         <input name="Dob" type="date" autocomplete="off" class="form-control" id="Dob">
         <div class="form-text">
-            @Html.ValidationMessageFor(model => model.Dob, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Dob", "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="mb-3">
         <label for="Credit" class="form-label">Credit</label>
-        <input name="Credit" type="number" autocomplete="off" class="form-control" id="Credit">
+        <input name="Credit" type="number" autocomplete="off" class="form-control" id="Credit" placeholder="Credit Completed">
         <div class="form-text">
-            @Html.ValidationMessageFor(model => model.Credit, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Credit", "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="mb-3">
         <label for="Cgpa" class="form-label">Cgpa</label>
-        <input name="Cgpa" type="number" autocomplete="off" class="form-control" id="Cgpa">
+        <input name="Cgpa" type="number" autocomplete="off" class="form-control" id="Cgpa" placeholder="Total CGPA">
         <div class="form-text">
-            @Html.ValidationMessageFor(model => model.Cgpa, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Cgpa", "", new { @class = "text-danger" })
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>

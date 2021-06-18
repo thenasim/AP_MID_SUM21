@@ -1,4 +1,4 @@
-﻿@model MidTask1.Models.Student
+﻿@model MidTask1.Models.ViewModel.StudentDepts
 @{
     ViewBag.Title = "Edit";
 }
@@ -6,40 +6,59 @@
 <h2>Edit Student</h2>
 
 <form action="/Student/Edit" method="post">
-    <input type="hidden" name="StudentId" value="@Model.StudentId" />
+    <input type="hidden" name="StudentId" value="@Model.Student.StudentId" />
     <div class="mb-3">
         <label for="Name" class="form-label">Name</label>
-        <input name="Name" type="text" value="@Model.Name" autocomplete="off" class="form-control" id="Name">
+        <input name="Name" type="text" value="@Model.Student.Name" autocomplete="off" class="form-control" id="Name">
         <div class="form-text">
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Name", "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="mb-3">
         <label for="Id" class="form-label">Id</label>
-        <input name="Id" type="text" value="@Model.Id" autocomplete="off" class="form-control" id="Id">
+        <input name="Id" type="text" value="@Model.Student.Id" autocomplete="off" class="form-control" id="Id">
         <div class="form-text">
-            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Id", "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="Dept" class="form-label">Department</label>
+        <select name="DeptId" class="form-select" id="Dept" aria-label="Default select example">
+            <option value="">Select Department</option>
+            @foreach (var d in Model.Depts)
+            {
+                if (d.DeptId == Model.Student.DeptId)
+                {
+                    <option value="@d.DeptId" selected>@d.Name</option>
+                } else
+                {
+                    <option value="@d.DeptId">@d.Name</option>
+                }
+            }
+        </select>
+        <div class="form-text">
+            @Html.ValidationMessage("DeptId", "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="mb-3">
         <label for="Dob" class="form-label">Date of birth</label>
-        <input name="Dob" type="date" value="@Model.Dob" autocomplete="off" class="form-control" id="Dob">
+        <input name="Dob" type="date" value="@Model.Student.Dob" autocomplete="off" class="form-control" id="Dob">
         <div class="form-text">
-            @Html.ValidationMessageFor(model => model.Dob, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Dob", "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="mb-3">
         <label for="Credit" class="form-label">Credit</label>
-        <input name="Credit" type="number" value="@Model.Credit" autocomplete="off" class="form-control" id="Credit">
+        <input name="Credit" type="number" value="@Model.Student.Credit" autocomplete="off" class="form-control" id="Credit">
         <div class="form-text">
-            @Html.ValidationMessageFor(model => model.Credit, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Credit", "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="mb-3">
         <label for="Cgpa" class="form-label">Cgpa</label>
-        <input name="Cgpa" type="number" value="@Model.Cgpa" autocomplete="off" class="form-control" id="Cgpa">
+        <input name="Cgpa" type="number" value="@Model.Student.Cgpa" autocomplete="off" class="form-control" id="Cgpa">
         <div class="form-text">
-            @Html.ValidationMessageFor(model => model.Cgpa, "", new { @class = "text-danger" })
+            @Html.ValidationMessage("Cgpa", "", new { @class = "text-danger" })
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Update</button>

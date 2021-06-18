@@ -24,7 +24,7 @@ namespace MidTask1.Models.Database
             cmd.Parameters.AddWithValue("@dob", s.Dob);
             cmd.Parameters.AddWithValue("@credit", s.Credit);
             cmd.Parameters.AddWithValue("@cgpa", s.Cgpa);
-            cmd.Parameters.AddWithValue("@dept_id", 1); // Added hard coded value in dept id
+            cmd.Parameters.AddWithValue("@dept_id", s.DeptId);
 
             this.conn.Open();
             cmd.ExecuteNonQuery();
@@ -53,6 +53,7 @@ namespace MidTask1.Models.Database
                 };
             }
 
+            this.conn.Close();
             return s;
         }
 
@@ -87,13 +88,14 @@ namespace MidTask1.Models.Database
         public void Update(Student s)
         {
             // Removed dept id from query string
-            string query = $"UPDATE Students Set Name=@name, Id=@id, Dob=@dob, Credit=@credit, Cgpa=@cgpa WHERE StudentId={s.StudentId}";
+            string query = $"UPDATE Students Set Name=@name, Id=@id, Dob=@dob, Credit=@credit, Cgpa=@cgpa, DeptId=@deptid WHERE StudentId={s.StudentId}";
             SqlCommand cmd = new SqlCommand(query, this.conn);
             cmd.Parameters.AddWithValue("@name", s.Name);
             cmd.Parameters.AddWithValue("@id", s.Id);
             cmd.Parameters.AddWithValue("@dob", s.Dob);
             cmd.Parameters.AddWithValue("@credit", s.Credit);
             cmd.Parameters.AddWithValue("@cgpa", s.Cgpa);
+            cmd.Parameters.AddWithValue("@deptid", s.DeptId);
 
             this.conn.Open();
             cmd.ExecuteNonQuery();

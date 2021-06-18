@@ -1,7 +1,9 @@
 ﻿using MidTask1.Models;
 using MidTask1.Models.Database;
+using MidTask1.Models.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,39 +21,77 @@ namespace MidTask1.Controllers
 
         public ActionResult Insert()
         {
-            Student s = new Student();
-            return View(s);
+            Database db = new Database();
+
+            // First way to show the multiple model in a view
+
+            /*dynamic mymodel = new ExpandoObject();
+            mymodel.Student = new Student();
+            mymodel.Depts = db.Depts.GetAll();*/
+
+
+            // Second way to show the multiple model in a view
+            StudentDepts studentDepts = new StudentDepts
+            {
+                Student = new Student(),
+                Depts = db.Depts.GetAll()
+            };
+
+
+            return View(studentDepts);
         }
 
         [HttpPost]
         public ActionResult Insert(Student s)
         {
+            Database db = new Database();
+
             if (ModelState.IsValid)
             {
-                Database db = new Database();
                 db.Students.Insert(s);
                 return RedirectToAction("Index");
             }
-            return View();
+
+            StudentDepts studentDepts = new StudentDepts
+            {
+                Student = s,
+                Depts = db.Depts.GetAll()
+            };
+
+            return View(studentDepts);
         }
 
         public ActionResult Edit(int id)
         {
             Database db = new Database();
-            Student s = db.Students.Get(id);
-            return View(s);
+
+            StudentDepts studentDepts = new StudentDepts
+            {
+                Student = db.Students.Get(id),
+                Depts = db.Depts.GetAll()
+            };
+
+            return View(studentDepts);
         }
 
         [HttpPost]
         public ActionResult Edit(Student s)
         {
+            Database db = new Database();
+
             if (ModelState.IsValid)
             {
-                Database db = new Database();
                 db.Students.Update(s);
                 return RedirectToAction("Index");
             }
-            return View(s);
+
+            StudentDepts studentDepts = new StudentDepts
+            {
+                Student = s,
+                Depts = db.Depts.GetAll()
+            };
+
+            return View(studentDepts);
         }
 
         public ActionResult Delete(int id)

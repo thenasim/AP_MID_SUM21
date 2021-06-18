@@ -32,6 +32,7 @@ namespace MidTask1.Models.Database
                 };
             }
 
+            this.conn.Close();
             return d;
         }
 

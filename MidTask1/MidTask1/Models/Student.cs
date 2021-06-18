@@ -28,6 +28,7 @@ namespace MidTask1.Models
         [Range(0, 4)]
         public double Cgpa { get; set; }
 
+        [Required(ErrorMessage = "Department can't be empty")]
         public int DeptId { get; set; }
     }
 }
