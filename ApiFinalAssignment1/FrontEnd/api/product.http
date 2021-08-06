@@ -1,2 +1,0 @@
-GET https://localhost:44367/api/Product/GetAll
-Accept: application/json
